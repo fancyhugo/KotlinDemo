@@ -12,3 +12,9 @@ fun main(args: Array<String>) {
     }
 
 }
+
+fun test(x: Int): String {
+    return if (x > 5)
+        "x > 5"
+    else "x <= 5"
+}
