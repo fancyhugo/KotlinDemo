@@ -6,6 +6,10 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +22,26 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+        startCoroutine()
+    }
+
+    private fun startCoroutine() {
+        // funTest协程体
+        val funTest: suspend CoroutineScope.() -> Unit = {
+            println("funTest")
+            suspendFun1()
+            suspendFun2()
+        }
+        GlobalScope.launch(Dispatchers.Default, block = funTest)
+    }
+
+    // 挂起函数
+    suspend fun suspendFun1() {
+        println("suspendFun1")
+    }
+    // 挂起函数
+    suspend fun suspendFun2() {
+        println("suspendFun2")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
